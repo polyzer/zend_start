@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Список автомобилей</div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody?
+            <?php foreach ($cars as $value => $el): ?>
+            <tr>
+            <th scope=\"row\"><?= ++$value; ?></th>
+            <td><?= $this->escapeHtml($el->getModel()); --$value;?></td>
+            <td><?= $this->escapeHtml($el->getDescription()); --$value;?></td>
+                <td>
+                    <a href="<?php echo $this->url('catalogs', array('action'=>'edit', 'id' => $el->getId()));?>">Редактировать</a>
+                    <a class="deletebutton" href="<?php echo $this->url('catalogs', array('action'=>'delete', 'id' => $el->getId()));?>">Удалить</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div align="center"><a href="<?php echo $this->url('catalogs', array('action'=>'add'));?>" type="button" class="btn-success btn-lg">Добавить авто</a></div>
+    </div>
+</div>

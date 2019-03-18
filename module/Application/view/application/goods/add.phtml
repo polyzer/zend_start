@@ -1,0 +1,40 @@
+<?php
+$form = $this->form;
+$form->get('name')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Введите название двигателя...'
+]);
+$form->get('power')->setAttributes([
+    'class' => 'form-control',
+    'placeholder'=>'Введите мощность двигателя...'
+]);
+$form->get('description')->setAttributes([
+    'class' => 'form-control',
+    'placeholder'=>'Введите описание двигателя...'
+]);
+$form->get('submitadd')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submitadd')->setValue('Добавить');
+$form->prepare();
+?>
+<div class="panel panel-default">
+    <div class="panel-heading">Добавить двигатель</div>
+    <div class="panel-body">
+        <?php
+        $this->headTitle($title);
+        ?>
+        <h1><?php echo $this->escapeHtml($title); ?></h1>
+        <?php
+        $form->setAttribute('action', $this->url('goods', array('action' => 'add')));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+
+        echo $this->formRow($form->get('name'));
+        echo $this->formRow($form->get('power'));
+        echo $this->formRow($form->get('description'));
+        echo $this->formSubmit($form->get('submitadd'));
+
+        echo $this->form()->closeTag();
+
+        ?>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Список двигателей</div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Название</th>
+                <th>Мощность</th>
+                <th>Описание</th>
+                <th>Действие</th>
+            </tr>
+            </thead>
+            <tbody?
+            <?php foreach ($engines as $value => $el): ?>
+            <tr>
+            <th scope=\"row\"><?= ++$value; ?></th>
+            <td><?= $this->escapeHtml($el->getName()); --$value;?></td>
+            <td><?= $this->escapeHtml($el->getPower()); --$value;?></td>
+            <td><?= $this->escapeHtml($el->getDescription()); --$value;?></td>
+                <td>
+                    <a href="<?php echo $this->url('goods', array('action'=>'edit', 'id' => $el->getId()));?>">Редактировать</a>
+                    <a class="deletebutton" href="<?php echo $this->url('goods', array('action'=>'delete', 'id' => $el->getId()));?>">Удалить</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div align="center"><a href="<?php echo $this->url('goods', array('action'=>'add'));?>" type="button" class="btn-success btn-lg">Добавить двигатель</a></div>
+    </div>
+</div>

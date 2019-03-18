@@ -1,0 +1,34 @@
+<?php
+$form = $this->form;
+$form->get('model')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Введите название авто...'
+]);
+$form->get('description')->setAttributes([
+    'class' => 'form-control',
+    'placeholder'=>'Введите описание авто...'
+]);
+$form->get('submitcatadd')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submitcatadd')->setValue('Добавить');
+$form->prepare();
+?>
+<div class="panel panel-default">
+    <div class="panel-heading">Добавить авто</div>
+    <div class="panel-body">
+        <?php
+        $this->headTitle($title);
+        ?>
+        <h1><?php echo $this->escapeHtml($title); ?></h1>
+        <?php
+        $form->setAttribute('action', $this->url('catalogs', array('action' => 'add')));
+        $form->prepare();
+        echo $this->form()->openTag($form);
+
+        echo $this->formRow($form->get('model'));
+        echo $this->formRow($form->get('description'));
+        echo $this->formSubmit($form->get('submitcatadd'));
+        echo $this->form()->closeTag();
+
+        ?>
+    </div>
+</div>

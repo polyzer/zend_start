@@ -1,0 +1,54 @@
+<!--<div class="panel panel-default">
+    <div class="panel-heading">Редактировать каталог</div>
+    <div class="panel-body">
+        <Вопросзнакphp
+/*        $form->setAttribute('action', $this->url('catalogs', array('action' => 'edit', 'id' => $id)));
+        $form->prepare();
+
+        echo $this->form()->openTag($form);
+        echo $this->formRow($form->get('name'));
+        echo $this->formRow($form->get('parent_id'));
+        echo $this->formSubmit($form->get('submitcatadd'));
+        echo $this->form()->closeTag();
+
+        */?>
+    </div>
+</div>-->
+<?php
+$form = $this->form;
+$form->get('model')->setAttributes([
+    'class'=>'form-control',
+    'placeholder'=>'Enter post title here'
+]);
+$form->get('description')->setAttributes([
+    'placeholder'=>'Type content here',
+    'rows'=>2
+]);
+$form->get('submitcatadd')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submitcatadd')->setValue('Сохранить');
+$form->prepare();
+?>
+
+<h1>Редактирование авто</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('model')); ?>
+            <?= $this->formElement($form->get('model')); ?>
+            <?= $this->formElementErrors($form->get('model')); ?>
+        </div>
+
+        <div class="form-group">
+            <?= $this->formLabel($form->get('description')); ?>
+            <?= $this->formElement($form->get('description')); ?>
+            <?= $this->formElementErrors($form->get('description')); ?>
+        </div>
+
+        <?= $this->formElement($form->get('submitcatadd')); ?>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>

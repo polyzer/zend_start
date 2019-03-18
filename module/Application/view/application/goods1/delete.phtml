@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Удаление статьи</div>
+    <div class="panel-body">
+        <?php
+        $this->headTitle($title);
+        ?>
+        <h1><?php echo $this->escapeHtml($title); ?></h1>
+        <?php
+        $form->setAttribute('action', $this->url('goods', array('action' => 'delete', 'id' => $id)));
+        $form->prepare();
+        ?>
+        <h5>Уверены, что хотите удалить статью "<b><?php echo $this->goods->name ?></b>" из категории
+            <b><?php echo $catname ?></b> безвозвратно?</h5>
+        <?php
+        echo $this->form()->openTag($form);
+        $form->get('submitadd')->setAttribute('value', 'Удалить');
+        echo $this->formSubmit($form->get('submitadd'));
+        echo $this->form()->closeTag();
+        ?>
+    </div>
+</div>
