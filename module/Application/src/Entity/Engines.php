@@ -3,13 +3,23 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Application\Entity\Cars;
 /**
 * @ORM\Entity
 * @ORM\Table(name="engines")
 */
+
+
 class Engines
 {
+/**
+     * @ORM\ManyToMany(targetEntity="\Application\Entity\Cars", inversedBy="engines")
+     * @ORM\JoinTable(name="cars_engines",
+     *      joinColumns={@ORM\JoinColumn(name="engine_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="car_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $cars;
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -32,6 +42,30 @@ class Engines
      * @ORM\Column(name="description")
      */
     private $description;
+
+    public function __constructor(){
+        $this->cars = new ArrayCollection(); 
+    }
+
+    // Добавляет новый тег к данному посту.
+    public function addCars($car) 
+    {
+        $this->cars[] = $car;        
+    }
+
+    // Добавляет новый тег к данному посту.
+    public function getCars() 
+    {
+        return $this->cars;        
+    }
+
+    
+    // Удаляет связь между этим постом и заданным тегом.
+    public function removeCarAssociation($car) 
+    {
+        $this->cars->removeElement($car);
+    }
+
 
     // Возвращает ID каталога
     public function getId()

@@ -3,6 +3,7 @@ namespace Application\Service;
 
 use Application\Controller\CatalogsController;
 use Application\Entity\Cars;
+use Application\Entity\Engines;
 use Doctrine\ORM\EntityManager;
 
 // Сервис The CatalogManager, отвечающий за дополнение новых каталогов
@@ -33,10 +34,12 @@ class CatalogManager
         $car = new Cars();
         $car->setModel($data['model']);
         $car->setDescription($data['description']);
-
+        $engine = $this->entityManager->getRepository(Engines::class)->find($data['engine_id']);
+        $car->addEngine($engine);
+        $engine->addCars($car);
         // Добавляем сущность в менеджер сущностей.
         $this->entityManager->persist($car);
-
+        $this->entityManager->persist($engine);
         // Применяем изменения к базе данных.
         $this->entityManager->flush();
         

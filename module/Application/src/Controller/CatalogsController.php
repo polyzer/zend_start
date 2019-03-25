@@ -40,6 +40,7 @@ class CatalogsController extends AbstractActionController
     {
         $cars = $this->entityManager->getRepository(Cars::class)
             ->findAll();
+        foreach()
 
         return new ViewModel(array(
             'cars' => $cars

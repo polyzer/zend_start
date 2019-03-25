@@ -2,11 +2,11 @@
 $form = $this->form;
 $form->get('model')->setAttributes([
     'class'=>'form-control',
-    'placeholder'=>'Введите название авто...'
+    'placeholder'=>'Введите название компьютера...'
 ]);
 $form->get('description')->setAttributes([
     'class' => 'form-control',
-    'placeholder'=>'Введите описание авто...'
+    'placeholder'=>'Введите описание описание...'
 ]);
 $form->get('submitcatadd')->setAttributes(['class'=>'btn btn-primary']);
 $form->get('submitcatadd')->setValue('Добавить');
@@ -23,7 +23,7 @@ $form->prepare();
         $form->setAttribute('action', $this->url('catalogs', array('action' => 'add')));
         $form->prepare();
         echo $this->form()->openTag($form);
-
+        echo $this->formRow($form->get('engine_id')->setValue($cat_id));
         echo $this->formRow($form->get('model'));
         echo $this->formRow($form->get('description'));
         echo $this->formSubmit($form->get('submitcatadd'));

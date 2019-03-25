@@ -41,7 +41,7 @@ class ProductForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите название двигателя: ',
+                'label' => 'Введите название экрана: ',
             ],
         ]);
 
@@ -56,7 +56,7 @@ class ProductForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите мощность двигателя: ',
+                'label' => 'Введите диагональ: ',
             ],
         ]);
 
@@ -71,7 +71,7 @@ class ProductForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите описание двигателя: ',
+                'label' => 'Введите описание экрана: ',
             ],
         ]);
 

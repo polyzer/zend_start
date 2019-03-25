@@ -4,6 +4,7 @@ namespace Application\Form;
 
 use Application\Controller\CatalogsController;
 use Application\Entity\Cars;
+use Application\Entity\Engines;
 use Application\Service\CatalogManager;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
@@ -44,7 +45,7 @@ class CatalogForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите имя авто: ',
+                'label' => 'Введите название компьютера: ',
             ],
         ]);
 
@@ -58,7 +59,7 @@ class CatalogForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите описание авто: ',
+                'label' => 'Введите описание компьютера: ',
             ],
         ]);
 
@@ -69,6 +70,31 @@ class CatalogForm extends Form
             'attributes' => [
                 'value' => 'Добавить',
                 'class' => 'btn btn-primary'
+            ],
+        ]);
+        
+        $this->add([
+            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+            'name' => 'engine_id',
+            'options' => [
+                'label' => 'Экран',
+                'object_manager' => $this->em,
+                'target_class' => Engines::class,
+                'required' => true,
+                'allow_empty' => true,
+                'continue_if_empty' => false,
+                'find_method'    => [
+                    'name'   => 'findBy',
+                    'params' => [
+                        'criteria' => []
+                    ],
+                ],
+                'option_attributes' => [
+                    'class'   => 'form-control input'
+                ],
+                'label_generator' => function (Engines $engine) {
+                    return $engine->getPower();
+                }
             ],
         ]);
     }
