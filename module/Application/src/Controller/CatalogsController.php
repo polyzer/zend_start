@@ -39,9 +39,7 @@ class CatalogsController extends AbstractActionController
     public function indexAction()
     {
         $cars = $this->entityManager->getRepository(Cars::class)
-            ->findAll();
-        foreach()
-
+            ->findAll();       
         return new ViewModel(array(
             'cars' => $cars
         ));
@@ -72,7 +70,7 @@ class CatalogsController extends AbstractActionController
 
         // Создаем форму.
         $form = new CatalogForm($this->entityManager, $catalog);
-
+        $form->bind($catalog);
         // Проверяем, является ли пост POST-запросом.
         if ($this->getRequest()->isPost()) {
 
@@ -115,6 +113,7 @@ class CatalogsController extends AbstractActionController
     {
         // Создаем форму.
         $form = new CatalogForm($this->entityManager);
+        $car = new Cars();
         // Проверяем, является ли пост POST-запросом.
         if ($this->getRequest()->isPost()) {
 
