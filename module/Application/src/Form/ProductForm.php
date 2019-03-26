@@ -41,7 +41,7 @@ class ProductForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите название экрана: ',
+                'label' => 'Введите название ОС: ',
             ],
         ]);
 
@@ -56,7 +56,7 @@ class ProductForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите диагональ: ',
+                'label' => 'Введите версию: ',
             ],
         ]);
 
@@ -71,7 +71,7 @@ class ProductForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите описание экрана: ',
+                'label' => 'Введите описание описание: ',
             ],
         ]);
 

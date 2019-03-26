@@ -75,12 +75,15 @@ class GoodsController extends AbstractActionController
             $this->getResponse()->setStatusCode(404);
             return;
         }
-        $form->bind($product);
+        #$form->bind($product);
         // Проверяем, является ли пост POST-запросом.
         if ($this->getRequest()->isPost()) {
             // Получаем POST-данные.
             $request = $this->getRequest();
-
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
 
             // Заполняем форму данными.
             $form->setData($data);
@@ -133,7 +136,7 @@ class GoodsController extends AbstractActionController
         // Создаем форму.
         $form = new ProductForm($this->entityManager);
         $engine = new Engines();
-        $form->bind($product);
+        #$form->bind($product);
         // Проверяем, является ли пост POST-запросом.
         if ($this->getRequest()->isPost()) {
             // Получаем POST-данные.

@@ -2,6 +2,7 @@
 
 namespace Application\Form;
 
+use Zend\Form\Element;
 use Application\Controller\CatalogsController;
 use Application\Entity\Cars;
 use Application\Entity\Engines;
@@ -45,7 +46,7 @@ class CatalogForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите название компьютера: ',
+                'label' => 'Введите название телефона: ',
             ],
         ]);
 
@@ -59,7 +60,7 @@ class CatalogForm extends Form
                 'style' => 'display:block; margin-bottom:10px;'
             ],
             'options' => [
-                'label' => 'Введите описание компьютера: ',
+                'label' => 'Введите описание телефона: ',
             ],
         ]);
 
@@ -73,28 +74,42 @@ class CatalogForm extends Form
             ],
         ]);
         
+        // $this->add([
+        //     'type' => 'DoctrineModule\Form\Element\ObjectSelect',
+        //     'name' => 'engine_id',
+        //     'options' => [
+        //         'label' => 'Операционная система',
+        //         'object_manager' => $this->em,
+        //         'target_class' => Engines::class,
+        //         'required' => true,
+        //         'allow_empty' => true,
+        //         'continue_if_empty' => true,
+        //         'find_method'    => [
+        //             'name'   => 'findBy',
+        //             'params' => [
+        //                 'criteria' => []
+        //             ],
+        //         ],
+        //         'option_attributes' => [
+        //             'class'   => 'form-control input'
+        //         ],
+        //         'label_generator' => function (Engines $engine) {
+        //             return $engine->getPower();
+        //         }
+        //     ],
+        // ]);
+
+        $oses = $this->em->getRepository(Engines::class)->findAll(); 
+        $val_opts = [];
+        foreach($oses as $val){
+            $val_opts[$val->getId()] = $val->getPower();
+        }
         $this->add([
-            'type' => 'DoctrineModule\Form\Element\ObjectSelect',
-            'name' => 'engine_id',
+            'type' => Element\MultiCheckbox::class,
+            'name' => 'oses',
             'options' => [
-                'label' => 'Экран',
-                'object_manager' => $this->em,
-                'target_class' => Engines::class,
-                'required' => true,
-                'allow_empty' => true,
-                'continue_if_empty' => false,
-                'find_method'    => [
-                    'name'   => 'findBy',
-                    'params' => [
-                        'criteria' => []
-                    ],
-                ],
-                'option_attributes' => [
-                    'class'   => 'form-control input'
-                ],
-                'label_generator' => function (Engines $engine) {
-                    return $engine->getPower();
-                }
+                'label' => 'Выберите операционные системы',
+                'value_options' => $val_opts,
             ],
         ]);
     }

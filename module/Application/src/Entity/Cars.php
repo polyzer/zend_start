@@ -109,4 +109,10 @@ class Cars
     public function __toString(){
         return $this->getmodel();
     }
+
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
 }

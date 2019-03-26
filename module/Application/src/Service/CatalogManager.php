@@ -34,12 +34,23 @@ class CatalogManager
         $car = new Cars();
         $car->setModel($data['model']);
         $car->setDescription($data['description']);
-        $engine = $this->entityManager->getRepository(Engines::class)->find($data['engine_id']);
-        $car->addEngine($engine);
-        $engine->addCars($car);
-        // Добавляем сущность в менеджер сущностей.
-        $this->entityManager->persist($car);
-        $this->entityManager->persist($engine);
+        //$engine = $this->entityManager->getRepository(Engines::class)->find($data['engine_id']);
+        //$car->addEngine($engine);
+        //$engine->addCars($car);
+
+        //$oses = $this->entityManager->getRepository(Engines::class)->find($data['oses']);
+        //$this->entityManager->persist($car);
+        //$this->entityManager->persist($engine);
+
+        foreach($data['oses'] as $key => $val){
+            $engine = $this->entityManager->getRepository(Engines::class)->find($val);
+            $car->addEngine($engine);
+            $engine->addCars($car);
+            // Добавляем сущность в менеджер сущностей.
+            $this->entityManager->persist($car);
+            $this->entityManager->persist($engine);
+        }
+
         // Применяем изменения к базе данных.
         $this->entityManager->flush();
         
